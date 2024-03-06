@@ -25,7 +25,6 @@
     </script>
 
     <style>
-        /* Common styles for form elements */
         .form-control {
             margin-bottom: 20px;
         }
@@ -34,7 +33,6 @@
             font-weight: bold;
         }
 
-        /* Center the form on smaller screens */
         .hero-content {
             display: flex;
             flex-direction: column;
@@ -42,7 +40,6 @@
             text-align: center;
         }
 
-        /* Adjust the background image for better visibility */
         .hero {
             background-image: url(images/blur.png);
             background-size: cover;
@@ -50,7 +47,6 @@
             min-height: 100vh;
         }
 
-        /* Responsive styles for form elements */
         @media (max-width: 640px) {
             .input {
                 width: 100%;
@@ -88,24 +84,17 @@
                                     Remember</button>
                             </div> <br>
                             <?php
-                            // Start or resume the session
                             session_start();
                             $error = '<div class="alert alert-success font-bold lg:flex justify-around w-full" >Remembered.. <br> You wont be called <br> in 3 months.<a href="home.php" class="bg-blood px-4 py-2 rounded-lg text-white">Return Home</a></div>';
 
                             if (isset($_POST['donate'])) {
                                 $donatedDate = $_POST['date'];
 
-                                // Check if the user is logged in
                                 if (isset($_SESSION['user_id'])) {
                                     $userId = $_SESSION['user_id'];
 
-                                    // Ensure that you have a valid database connection (you might need to modify "db.php")
                                     if ($conn) {
-                                        // Assuming you have a "users" table with a column named "donated"
-                                        // Update the "donated" date for the logged-in user
-                                        $updateQuery = "UPDATE users SET donated = '$donatedDate' WHERE id = $userId"; // Modify the WHERE clause as needed
-                            
-                                        // Execute the update query
+                                        $updateQuery = "UPDATE users SET donated = '$donatedDate' WHERE id = $userId"; 
                                         $updateResult = mysqli_query($conn, $updateQuery);
 
                                         if ($updateResult) {
@@ -114,7 +103,6 @@
                                             echo "Error updating donation date: " . mysqli_error($conn);
                                         }
 
-                                        // Close the database connection
                                         mysqli_close($conn);
                                     } else {
                                         echo "Database connection error.";
